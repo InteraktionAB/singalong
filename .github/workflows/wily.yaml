@@ -34,7 +34,7 @@ jobs:
           DIFF="${DIFF//$'\r'/'%0D'}"
           echo "::set-output name=diff::$DIFF"
       - name: Find current PR
-        uses: jwalton/gh-fing-current-pr@v1
+        uses: jwalton/gh-find-current-pr@v1
         id: findPr
       - name: Add Wily PR Comment
         uses: marocchino/sticky-pull-request-comment@v2
