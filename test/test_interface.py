@@ -12,13 +12,19 @@ from typing import Any, List
 import gradio
 import pytest
 
-from sing import inputs
+from sing import choices, inputs
 
 expected: List[Any] = [gradio.Audio]
 provided: List[Any] = list(map(type, inputs))
 
+expected_choices: List[str] = ["Fly Me to the Moon"]
+provided_choices: List[str] = choices
 
-@pytest.mark.parametrize("provided, expected", [(provided, expected)])
+
+@pytest.mark.parametrize(
+    "provided, expected",
+    [(provided, expected), (provided_choices, expected_choices)],  # noqa
+)
 def test_components(provided: List[Any], expected: List[Any]) -> None:
 
     """Test the input component list
