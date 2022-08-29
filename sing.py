@@ -4,4 +4,4 @@ from gradio import Audio, Dropdown
 
 choices: List[str] = ["Fly Me to the Moon"]
 inputs: List[Any] = [Audio(source="microphone"), Dropdown(choices)]
-outputs: List[Any] = [""]
+outputs: List[Any] = [Audio()]
