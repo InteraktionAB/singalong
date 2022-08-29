@@ -28,7 +28,7 @@ expected_inputs_in_interface: List[Any] = inputs
 provided_inputs_in_interface: List[Any] = interface.input_components
 
 expected_outputs_in_interface: List[Any] = outputs
-provided_outputs_in_interface: List[Any] = provided_outputs
+provided_outputs_in_interface: List[Any] = interface.output_components
 
 expected_function: Callable = inference
 provided_function: Callable = interface.fn
