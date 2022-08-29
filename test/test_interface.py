@@ -18,7 +18,7 @@ expected: List[Any] = [gradio.Audio(source="microphone")]
 
 
 @pytest.mark.parametrize("components, expected", [(inputs, expected)])
-def test_components(components: list[Any], expected: list[Any]) -> None:
+def test_components(components: List[Any], expected: List[Any]) -> None:
 
     """Test the input component list
 
