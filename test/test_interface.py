@@ -14,19 +14,20 @@ import pytest
 
 from sing import inputs
 
-expected: List[Any] = [gradio.Audio(source="microphone")]
+expected: List[Any] = [gradio.Audio]
+provided: List[Any] = list(map(type, inputs))
 
 
-@pytest.mark.parametrize("components, expected", [(inputs, expected)])
-def test_components(components: List[Any], expected: List[Any]) -> None:
+@pytest.mark.parametrize("provided, expected", [(provided, expected)])
+def test_components(provided: List[Any], expected: List[Any]) -> None:
 
     """Test the input component list
 
     Make sure the components are as expected.
 
     Args:
-        components: A list containing Gradio components.
-        expected: A list containing expected components.
+        provided: A list containing type of Gradio components.
+        expected: A list containing expected type of components.
 
     Returns:
         This functions returns None.
@@ -35,4 +36,4 @@ def test_components(components: List[Any], expected: List[Any]) -> None:
         AssertionError: When components are not expected.
     """
 
-    assert components == expected
+    assert provided == expected
