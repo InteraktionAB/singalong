@@ -11,9 +11,9 @@ from typing import Any, List
 
 import gradio
 import pytest
-from gradio import Dropdown
+from gradio import Audio, Dropdown
 
-from sing import choices, inputs
+from sing import choices, inputs, outputs
 
 expected: List[Any] = [gradio.Audio, Dropdown]
 provided: List[Any] = list(map(type, inputs))
@@ -21,10 +21,17 @@ provided: List[Any] = list(map(type, inputs))
 expected_choices: List[str] = ["Fly Me to the Moon"]
 provided_choices: List[str] = choices
 
+expected_outputs: List[Any] = [Audio]
+provided_outputs: List[Any] = list(map(type, outputs))
+
 
 @pytest.mark.parametrize(
     "provided, expected",
-    [(provided, expected), (provided_choices, expected_choices)],  # noqa
+    [
+        (provided, expected),
+        (provided_choices, expected_choices),
+        (provided_outputs, expected_outputs),
+    ],  # noqa
 )
 def test_components(provided: List[Any], expected: List[Any]) -> None:
 
