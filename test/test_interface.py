@@ -11,10 +11,11 @@ from typing import Any, List
 
 import gradio
 import pytest
+from gradio import Dropdown
 
 from sing import choices, inputs
 
-expected: List[Any] = [gradio.Audio]
+expected: List[Any] = [gradio.Audio, Dropdown]
 provided: List[Any] = list(map(type, inputs))
 
 expected_choices: List[str] = ["Fly Me to the Moon"]
