@@ -7,14 +7,14 @@ This module contains the tests for Gradio interface.
     pytest test/test_interface.py
 """
 
-from typing import Any
+from typing import Any, List
 
 import gradio
 import pytest
 
 from sing import inputs
 
-expected: list[Any] = [gradio.Audio(source="microphone")]
+expected: List[Any] = [gradio.Audio(source="microphone")]
 
 
 @pytest.mark.parametrize("components, expected", [(inputs, expected)])
