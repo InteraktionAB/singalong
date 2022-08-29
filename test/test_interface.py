@@ -24,10 +24,10 @@ provided_choices: List[str] = choices
 expected_outputs: List[Any] = [Audio]
 provided_outputs: List[Any] = list(map(type, outputs))
 
-expected_inputs_in_interface: List[Any] = expected
+expected_inputs_in_interface: List[Any] = inputs
 provided_inputs_in_interface: List[Any] = interface.input_components
 
-expected_outputs_in_interface: List[Any] = expected_outputs
+expected_outputs_in_interface: List[Any] = outputs
 provided_outputs_in_interface: List[Any] = provided_outputs
 
 expected_function: Callable = inference
