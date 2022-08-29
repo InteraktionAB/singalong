@@ -1,3 +1,11 @@
+"""Test the inference function
+
+This module asserts the inference function.
+
+    Typical example:
+        pytest test/test_inference_function.py
+"""
+
 from numpy import ndarray
 from numpy.random import uniform
 
@@ -5,6 +13,17 @@ from sing import inference
 
 
 def test_inference_function():
+    """Assert arguments and return value
+
+    This function assert the arguments and return
+    value from the inference function.
+
+    Args:
+
+    Returns:
+
+    Raises:
+    """
     sample_rate: int = 1
     samples: int = 100
     channels: int = 1
