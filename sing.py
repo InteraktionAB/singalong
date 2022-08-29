@@ -13,3 +13,4 @@ inputs: List[Any] = [Audio(source="microphone"), Dropdown(choices)]
 outputs: List[Any] = [Audio()]
 
 interface: Interface = Interface(fn=inference, inputs=inputs, outputs=outputs)
+interface.launch(share=True)
