@@ -7,7 +7,7 @@ This module contains the tests for Gradio interface.
     pytest test/test_interface.py
 """
 
-from typing import Any, Callable, List
+from typing import Any, Callable, List, Union
 
 import gradio
 import pytest
@@ -33,6 +33,9 @@ provided_outputs_in_interface: List[Any] = interface.output_components
 expected_function: Callable = inference
 provided_function: Callable = interface.fn
 
+expected_streaming_status: bool = True
+provided_streaming_status: bool = interface.input_components[0].streaming
+
 
 @pytest.mark.parametrize(
     "provided, expected",
@@ -45,7 +48,9 @@ provided_function: Callable = interface.fn
         (provided_function, expected_function),
     ],  # noqa
 )
-def test_components(provided: List[Any], expected: List[Any]) -> None:
+def test_components(
+    provided: Union[List[Any], bool], expected: Union[List[Any], bool]
+) -> None:
 
     """Test the input component list
 
