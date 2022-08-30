@@ -30,6 +30,9 @@ provided_streaming_status: bool = inputs[0].streaming
 exprected_output_streaming_status: bool = False
 provided_output_streaming_status: bool = outputs[0].streaming
 
+expected_input_audio_source: str = "upload"
+provided_input_audio_source: str = inputs[0].source
+
 
 @pytest.mark.parametrize(
     "provided, expected",
@@ -38,10 +41,11 @@ provided_output_streaming_status: bool = outputs[0].streaming
         (provided_choices, expected_choices),
         (provided_outputs, expected_outputs),
         (provided_streaming_status, expected_streaming_status),
+        (provided_input_audio_source, expected_input_audio_source),
     ],  # noqa
 )
 def test_components(
-    provided: Union[List[Any], bool], expected: Union[List[Any], bool]
+    provided: Union[List[Any], bool, str], expected: Union[List[Any], bool, str]  # noqa
 ) -> None:
 
     """Test the input component list
