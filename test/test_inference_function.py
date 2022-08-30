@@ -9,7 +9,7 @@ This module asserts the inference function.
 from numpy import ndarray
 from numpy.random import uniform
 
-from sing import inference
+from singalong.inference import inference
 
 
 def test_inference_function():
