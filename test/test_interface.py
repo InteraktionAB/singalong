@@ -24,8 +24,11 @@ provided_choices: List[str] = choices
 expected_outputs: List[Any] = [Audio]
 provided_outputs: List[Any] = list(map(type, outputs))
 
-expected_streaming_status: bool = True
+expected_streaming_status: bool = False
 provided_streaming_status: bool = inputs[0].streaming
+
+exprected_output_streaming_status: bool = False
+provided_output_streaming_status: bool = outputs[0].streaming
 
 
 @pytest.mark.parametrize(

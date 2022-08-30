@@ -35,7 +35,7 @@ def inference(sample: Tuple[int, ndarray], song: str) -> Tuple[int, ndarray]:
 
 choices: List[str] = ["Fly Me to the Moon"]
 inputs: List[Any] = [
-    Audio(source="microphone", streaming=True),
+    Audio(source="microphone", streaming=False),
     Dropdown(choices),
 ]  # noqa
-outputs: List[Any] = [Audio()]
+outputs: List[Any] = [Audio(source="microphone", streaming=False)]
