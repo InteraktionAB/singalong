@@ -7,13 +7,13 @@ This module contains the tests for Gradio interface.
     pytest test/test_interface.py
 """
 
-from typing import Any, Callable, List, Union
+from typing import Any, List, Union
 
 import gradio
 import pytest
 from gradio import Audio, Dropdown
 
-from sing import choices, inference, inputs, interface, outputs
+from singalong.inference import choices, inputs, outputs
 
 expected: List[Any] = [gradio.Audio, Dropdown]
 provided: List[Any] = list(map(type, inputs))
@@ -24,17 +24,8 @@ provided_choices: List[str] = choices
 expected_outputs: List[Any] = [Audio]
 provided_outputs: List[Any] = list(map(type, outputs))
 
-expected_inputs_in_interface: List[Any] = inputs
-provided_inputs_in_interface: List[Any] = interface.input_components
-
-expected_outputs_in_interface: List[Any] = outputs
-provided_outputs_in_interface: List[Any] = interface.output_components
-
-expected_function: Callable = inference
-provided_function: Callable = interface.fn
-
 expected_streaming_status: bool = True
-provided_streaming_status: bool = interface.input_components[0].streaming
+provided_streaming_status: bool = inputs[0].streaming
 
 
 @pytest.mark.parametrize(
@@ -43,9 +34,7 @@ provided_streaming_status: bool = interface.input_components[0].streaming
         (provided, expected),
         (provided_choices, expected_choices),
         (provided_outputs, expected_outputs),
-        (provided_inputs_in_interface, expected_inputs_in_interface),
-        (provided_outputs_in_interface, expected_outputs_in_interface),
-        (provided_function, expected_function),
+        (provided_streaming_status, expected_streaming_status),
     ],  # noqa
 )
 def test_components(
