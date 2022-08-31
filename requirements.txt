@@ -1,1 +1,3 @@
 gradio==3.1.8b
+soundfile==0.10.2
+pytsmod==0.3.5

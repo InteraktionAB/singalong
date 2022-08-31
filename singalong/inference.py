@@ -14,6 +14,8 @@ from typing import Any, List, Tuple
 
 from gradio import Audio, Dropdown
 from numpy import ndarray
+from pytsmod import phase_vocoder
+from soundfile import SoundFile
 
 
 def inference(sample: Tuple[int, ndarray], song: str) -> Tuple[int, ndarray]:
@@ -30,7 +32,29 @@ def inference(sample: Tuple[int, ndarray], song: str) -> Tuple[int, ndarray]:
 
     Raises:
     """
-    return sample
+
+    duration: float = get_duration(song)
+    return sample[0], phase_vocoder(sample[1], duration)
+
+
+def get_duration(path: str) -> float:
+
+    """Return the duration of audio file
+
+    This function return the duration of the provided
+    audio file.
+
+    Args:
+        path: Path to the audio file.
+
+    Returns:
+        Return duration in seconds.
+
+    Raises:
+    """
+
+    file: SoundFile = SoundFile(path)
+    return file.frames / file.samplerate
 
 
 choices: List[str] = ["Fly Me to the Moon"]
