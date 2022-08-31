@@ -12,7 +12,7 @@ gradio interface.
 
 from typing import Any, List, Tuple
 
-from gradio import Audio, Dropdown
+from gradio import Audio
 from numpy import ndarray
 from pytsmod import phase_vocoder
 from soundfile import SoundFile
@@ -34,7 +34,7 @@ def inference(sample: Tuple[int, ndarray], song: str) -> Tuple[int, ndarray]:
     """
 
     duration: float = get_duration(song)
-    return sample[0], phase_vocoder(sample[1], duration)
+    return sample[0], phase_vocoder(sample[1], duration).astype("int16")
 
 
 def get_duration(path: str) -> float:
@@ -60,6 +60,6 @@ def get_duration(path: str) -> float:
 choices: List[str] = ["Fly Me to the Moon"]
 inputs: List[Any] = [
     Audio(source="upload", streaming=False),
-    Dropdown(choices),
+    Audio(type="filepath"),
 ]  # noqa
 outputs: List[Any] = [Audio(source="microphone", streaming=False)]

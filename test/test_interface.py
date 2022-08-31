@@ -12,7 +12,7 @@ from typing import Any, List, Tuple, Union
 
 import gradio
 import pytest
-from gradio import Audio, Dropdown
+from gradio import Audio
 from numpy import ndarray
 from numpy.testing import assert_allclose
 from soundfile import read
@@ -22,7 +22,7 @@ from singalong.inference import (choices, get_duration, inference, inputs,
 
 # fmt: on
 
-expected: List[Any] = [gradio.Audio, Dropdown]
+expected: List[Any] = [gradio.Audio, Audio]
 provided: List[Any] = list(map(type, inputs))
 
 expected_choices: List[str] = ["Fly Me to the Moon"]
@@ -49,6 +49,14 @@ _, returned_scaled_version = inference(
     (audio[1], audio[0]), "test/duration.wav"
 )  # noqa
 
+# inputs[0] read file path
+expected_return_type: str = "filepath"
+returned_return_type: str = inputs[1].type
+
+# Output expect numpy array
+expected_output_type: str = "numpy"
+returned_output_type: str = outputs[0].type
+
 
 @pytest.mark.parametrize(
     "expected, returned", [(expected_scaled_version, returned_scaled_version)]
@@ -66,6 +74,9 @@ def test_array(expected: ndarray, returned: ndarray):
         (provided_streaming_status, expected_streaming_status),
         (provided_input_audio_source, expected_input_audio_source),
         (returned_duration, expected_duration),
+        (returned_return_type, expected_return_type),
+        (returned_output_type, expected_output_type),
+        (returned_scaled_version.dtype, "int16"),
     ],  # noqa
 )
 def test_components(
