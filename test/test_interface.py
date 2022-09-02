@@ -74,7 +74,7 @@ returned_time_stamps: Tuple[Tuple[float]] = get_time_stamps(
         (
             asarray(expected_time_stamps),
             asarray(returned_time_stamps),
-            1e-2,
+            1e-0,
             0.2,
         ),  # noqa
     ],
