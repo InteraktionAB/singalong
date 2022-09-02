@@ -71,7 +71,12 @@ returned_time_stamps: Tuple[Tuple[float]] = get_time_stamps(
     "expected, returned, rtol, atol",
     [
         (expected_scaled_version, returned_scaled_version, 1e-5, 1),
-        (asarray(expected_time_stamps), asarray(returned_time_stamps), 1e-2, 0),  # noqa
+        (
+            asarray(expected_time_stamps),
+            asarray(returned_time_stamps),
+            1e-2,
+            0.2,
+        ),  # noqa
     ],
 )
 def test_array(expected: ndarray, returned: ndarray, rtol: float, atol: float):
