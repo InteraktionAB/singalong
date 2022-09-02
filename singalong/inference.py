@@ -10,16 +10,34 @@ gradio interface.
         interface = Interface(fn=inference, inputs=inputs, outputs=outputs)
 """
 
+from json import loads
 from typing import Any, List, Tuple
+from wave import open as open_wave
 
 from gradio import Audio
 from numpy import ndarray
 from pytsmod import phase_vocoder
 from soundfile import SoundFile
+from vosk import KaldiRecognizer, Model
 
 
 def get_time_stamps(path: str):
-    pass
+    wave = open_wave(path)
+    model = Model(lang="en-us")
+    recognizer = KaldiRecognizer(model, wave.getframerate())
+    recognizer.SetWords(True)
+    while True:
+        frame = wave.readframes(4000)
+        if len(frame) == 0:
+            break
+        recognizer.AcceptWaveform(frame)
+    metas: List[dict] = loads(recognizer.FinalResult())["result"]
+    time_stamps = []
+    for meta in metas:
+        start: float = meta["start"]
+        end: float = meta["end"]
+        time_stamps.append((start, end))
+    return tuple(time_stamps)
 
 
 def inference(sample: Tuple[int, ndarray], song: str) -> Tuple[int, ndarray]:
