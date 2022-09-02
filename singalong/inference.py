@@ -18,6 +18,10 @@ from pytsmod import phase_vocoder
 from soundfile import SoundFile
 
 
+def get_time_stamps(path: str):
+    pass
+
+
 def inference(sample: Tuple[int, ndarray], song: str) -> Tuple[int, ndarray]:
     """The inference function
 

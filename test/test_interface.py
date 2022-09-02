@@ -17,8 +17,8 @@ from numpy import ndarray
 from numpy.testing import assert_allclose
 from soundfile import read
 
-from singalong.inference import (choices, get_duration, inference, inputs,
-                                 outputs)
+from singalong.inference import (choices, get_duration, get_time_stamps,
+                                 inference, inputs, outputs)
 
 # fmt: on
 
@@ -56,6 +56,15 @@ returned_return_type: str = inputs[1].type
 # Output expect numpy array
 expected_output_type: str = "numpy"
 returned_output_type: str = outputs[0].type
+
+expected_time_stamps = (
+    (0.06, 0.18),
+    (0.18, 0.24),
+    (0.24, 1.0),
+)  # Order (start, end)
+returned_time_stamps: Tuple[Tuple[float]] = get_time_stamps(
+    "test/term.wav"
+)  # Return timestamp
 
 
 @pytest.mark.parametrize(
