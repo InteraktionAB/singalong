@@ -37,6 +37,7 @@ def get_time_stamps(path: str):
         start: float = meta["start"]
         end: float = meta["end"]
         time_stamps.append((start, end))
+    wave.close()
     return tuple(time_stamps)
 
 
