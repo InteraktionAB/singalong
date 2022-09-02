@@ -13,7 +13,7 @@ from typing import Any, List, Tuple, Union
 import gradio
 import pytest
 from gradio import Audio
-from numpy import ndarray
+from numpy import asarray, ndarray
 from numpy.testing import assert_allclose
 from soundfile import read
 
@@ -68,10 +68,14 @@ returned_time_stamps: Tuple[Tuple[float]] = get_time_stamps(
 
 
 @pytest.mark.parametrize(
-    "expected, returned", [(expected_scaled_version, returned_scaled_version)]
+    "expected, returned, rtol, atol",
+    [
+        (expected_scaled_version, returned_scaled_version, 1e-5, 1),
+        (asarray(expected_time_stamps), asarray(returned_time_stamps), 1e-2, 0),  # noqa
+    ],
 )
-def test_array(expected: ndarray, returned: ndarray):
-    assert_allclose(expected, returned, rtol=1e-5, atol=1)
+def test_array(expected: ndarray, returned: ndarray, rtol: float, atol: float):
+    assert_allclose(expected, returned, rtol=rtol, atol=atol)
 
 
 @pytest.mark.parametrize(
