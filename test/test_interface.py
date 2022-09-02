@@ -86,6 +86,7 @@ def test_array(expected: ndarray, returned: ndarray):
         (returned_return_type, expected_return_type),
         (returned_output_type, expected_output_type),
         (returned_scaled_version.dtype, "int16"),
+        (returned_time_stamps, expected_time_stamps),
     ],  # noqa
 )
 def test_components(
