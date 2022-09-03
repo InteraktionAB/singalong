@@ -102,7 +102,7 @@ def _(arg: tuple) -> float:
     return arg[1] - arg[0]
 
 
-def get_stretched_audio(from_: str, to_: str):
+def get_stretched_audio(from_: str, dur: float):
 
     """Returns from stretched to to
 
@@ -112,7 +112,7 @@ def get_stretched_audio(from_: str, to_: str):
 
     Args:
         from_: The input audio.
-        to_: The reference audio.
+        dur: Duration.
 
     Returns:
         Stretched version of from.
@@ -121,9 +121,8 @@ def get_stretched_audio(from_: str, to_: str):
     """
 
     from_audio: Tuple[NDArray, int] = read(from_)
-    duration: float = 1 / get_duration(to_)
 
-    return phase_vocoder(from_audio[0], duration)
+    return phase_vocoder(from_audio[0], dur)
 
 
 choices: List[str] = ["Fly Me to the Moon"]
