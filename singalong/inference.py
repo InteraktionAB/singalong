@@ -57,9 +57,10 @@ def inference(sample: Tuple[int, ndarray], song: str) -> Tuple[int, ndarray]:
     """
 
     duration: float = get_duration(song)
-    path: str = "audio.wav"
+    path: str = "test/audio.wav"
     _ = write(path, sample[1], sample[0])
     _ = get_time_stamps(path=path)
+    _ = get_time_stamps(path=song)
     return sample[0], phase_vocoder(sample[1], duration).astype("int16")
 
 
