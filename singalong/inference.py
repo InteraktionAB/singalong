@@ -17,7 +17,7 @@ from wave import open as open_wave
 from gradio import Audio
 from numpy import ndarray
 from pytsmod import phase_vocoder
-from soundfile import SoundFile
+from soundfile import SoundFile, write
 from vosk import KaldiRecognizer, Model
 
 
@@ -57,6 +57,9 @@ def inference(sample: Tuple[int, ndarray], song: str) -> Tuple[int, ndarray]:
     """
 
     duration: float = get_duration(song)
+    path: str = "audio.wav"
+    _ = write(path, sample[1], sample[0])
+    _ = get_time_stamps(path=path)
     return sample[0], phase_vocoder(sample[1], duration).astype("int16")
 
 
