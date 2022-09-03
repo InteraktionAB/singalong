@@ -113,7 +113,6 @@ def test_array(expected: ndarray, returned: ndarray, rtol: float, atol: float):
         (returned_output_type, expected_output_type),
         (returned_scaled_version.dtype, "int16"),
         (returned_duration_, expected_duration_),
-        (returned_stretched_audio_sr, expected_stretched_audio_sr),
     ],  # noqa
 )
 def test_components(
