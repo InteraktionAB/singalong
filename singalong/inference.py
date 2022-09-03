@@ -87,7 +87,7 @@ def get_duration(arg) -> float:
 
 
 @get_duration.register
-def _(arg: Tuple) -> float:
+def _(arg: tuple) -> float:
 
     """Return the duration of the audio file
 
