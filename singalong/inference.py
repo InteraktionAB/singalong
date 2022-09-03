@@ -17,8 +17,9 @@ from wave import open as open_wave
 
 from gradio import Audio
 from numpy import ndarray
+from numpy.typing import NDArray
 from pytsmod import phase_vocoder
-from soundfile import SoundFile
+from soundfile import SoundFile, read
 from vosk import KaldiRecognizer, Model
 
 
@@ -99,6 +100,30 @@ def _(arg: tuple) -> float:
     """
 
     return arg[1] - arg[0]
+
+
+def get_stretched_audio(from_: str, to_: str):
+
+    """Returns from stretched to to
+
+    This function returns stretched version of
+    from. Stretch value is inverse of the duration
+    of to.
+
+    Args:
+        from_: The input audio.
+        to_: The reference audio.
+
+    Returns:
+        Stretched version of from.
+
+    Raises
+    """
+
+    from_audio: Tuple[NDArray, int] = read(from_)
+    duration: float = 1 / get_duration(to_)
+
+    return phase_vocoder(from_audio, duration)
 
 
 choices: List[str] = ["Fly Me to the Moon"]

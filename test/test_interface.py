@@ -15,10 +15,11 @@ import pytest
 from gradio import Audio
 from numpy import asarray, ndarray
 from numpy.testing import assert_allclose
+from numpy.typing import NDArray
 from soundfile import read
 
-from singalong.inference import (choices, get_duration, get_time_stamps,
-                                 inference, inputs, outputs)
+from singalong.inference import (choices, get_duration, get_stretched_audio,
+                                 get_time_stamps, inference, inputs, outputs)
 
 # fmt: on
 
@@ -70,6 +71,12 @@ returned_time_stamps: Tuple[Tuple[float]] = get_time_stamps(
 expected_duration_: float = 0.12
 returned_duration_: float = get_duration((0.06, 0.18))
 
+# Assert stretched result
+expected_stretched_audio_sr: Tuple[NDArray, int] = read("test/scale.flac")
+returned_stretched_audio_sr: Tuple[NDArray, int] = get_stretched_audio(
+    "test/scale_input.flac", "test/duration.flac"
+)
+
 
 @pytest.mark.parametrize(
     "expected, returned, rtol, atol",
@@ -80,6 +87,12 @@ returned_duration_: float = get_duration((0.06, 0.18))
             asarray(returned_time_stamps),
             1e-0,
             0.2,
+        ),  # noqa
+        (
+            expected_stretched_audio_sr[0],
+            returned_stretched_audio_sr[0],
+            1e-5,
+            1,
         ),  # noqa
     ],
 )
@@ -100,6 +113,7 @@ def test_array(expected: ndarray, returned: ndarray, rtol: float, atol: float):
         (returned_output_type, expected_output_type),
         (returned_scaled_version.dtype, "int16"),
         (returned_duration_, expected_duration_),
+        (returned_stretched_audio_sr, expected_stretched_audio_sr),
     ],  # noqa
 )
 def test_components(
