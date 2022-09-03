@@ -41,7 +41,7 @@ expected_input_audio_source: str = "upload"
 provided_input_audio_source: str = inputs[0].source
 
 expected_duration: float = 1.53
-returned_duration: float = get_duration(path="test/duration.wav")
+returned_duration: float = get_duration("test/duration.wav")
 
 expected_scaled_version, _ = read("test/scale.flac")
 audio: Tuple[int, ndarray] = read("test/scale_input.flac")
@@ -65,6 +65,10 @@ expected_time_stamps = (
 returned_time_stamps: Tuple[Tuple[float]] = get_time_stamps(
     "test/term.wav"
 )  # Return timestamp
+
+# Assert duration
+expected_duration_: float = 0.12
+returned_duration_: float = get_duration((0.06, 0.18))
 
 
 @pytest.mark.parametrize(
@@ -95,6 +99,7 @@ def test_array(expected: ndarray, returned: ndarray, rtol: float, atol: float):
         (returned_return_type, expected_return_type),
         (returned_output_type, expected_output_type),
         (returned_scaled_version.dtype, "int16"),
+        (returned_duration_, expected_duration_),
     ],  # noqa
 )
 def test_components(

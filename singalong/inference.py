@@ -10,6 +10,7 @@ gradio interface.
         interface = Interface(fn=inference, inputs=inputs, outputs=outputs)
 """
 
+from functools import singledispatch
 from json import loads
 from typing import Any, List, Tuple
 from wave import open as open_wave
@@ -64,7 +65,8 @@ def inference(sample: Tuple[int, ndarray], song: str) -> Tuple[int, ndarray]:
     return sample[0], phase_vocoder(sample[1], duration).astype("int16")
 
 
-def get_duration(path: str) -> float:
+@singledispatch
+def get_duration(arg) -> float:
 
     """Return the duration of audio file
 
@@ -80,8 +82,27 @@ def get_duration(path: str) -> float:
     Raises:
     """
 
-    file: SoundFile = SoundFile(path)
+    file: SoundFile = SoundFile(arg)
     return file.frames / file.samplerate
+
+
+@get_duration.register
+def _(arg: Tuple[float, float]) -> float:
+
+    """Return the duration of the audio file
+
+    This function returns the duration of start and end.
+
+    Args:
+        arg: A tuple of the order start, end.
+
+    Returns:
+        The duration from start to end.
+
+    Raises:
+    """
+
+    return arg[1] - arg[0]
 
 
 choices: List[str] = ["Fly Me to the Moon"]
