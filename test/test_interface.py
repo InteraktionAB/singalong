@@ -90,7 +90,7 @@ returned_stretched_audio_sr: Tuple[NDArray, int] = get_stretched_audio(
         ),  # noqa
         (
             expected_stretched_audio_sr[0],
-            returned_stretched_audio_sr[0],
+            returned_stretched_audio_sr,
             1e-5,
             1,
         ),  # noqa
