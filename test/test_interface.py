@@ -74,7 +74,7 @@ returned_duration_: float = get_duration((0.06, 0.18))
 # Assert stretched result
 expected_stretched_audio_sr: Tuple[NDArray, int] = read("test/scale.flac")
 returned_stretched_audio_sr: Tuple[NDArray, int] = get_stretched_audio(
-    "test/scale_input.flac", "test/duration.flac"
+    "test/scale_input.flac", "test/duration.wav"
 )
 
 
