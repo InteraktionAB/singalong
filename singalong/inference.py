@@ -123,7 +123,7 @@ def get_stretched_audio(from_: str, to_: str):
     from_audio: Tuple[NDArray, int] = read(from_)
     duration: float = 1 / get_duration(to_)
 
-    return phase_vocoder(from_audio, duration)
+    return phase_vocoder(from_audio[0], duration)
 
 
 choices: List[str] = ["Fly Me to the Moon"]
