@@ -352,5 +352,7 @@ if __name__ == "__main__":
 
     # Launch gradio interface
     Interface(
-        inference_, inputs=["audio", "audio"], outputs=["audio"], share=True
-    ).launch()
+        inference_,
+        inputs=["audio", "audio"],
+        outputs=["audio"],
+    ).launch(share=True)
