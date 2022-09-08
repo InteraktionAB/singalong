@@ -43,8 +43,8 @@ def get_chunks(data: bytes, chunk_size: int) -> List[bytes]:
             lambda index: (
                 data[
                     index
-                    * range_.stop:min(
-                        len(data), (index * range_.stop) + range_.stop
+                    * chunk_size:min(
+                        len(data), (index * chunk_size) + chunk_size
                     )  # noqa
                 ]
             ),
