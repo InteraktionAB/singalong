@@ -1,4 +1,4 @@
 gradio==3.2
 vosk==0.3.43
-pytosmod==0.3.5
+pytosmod==0.3.3
 numpy==1.23.2
